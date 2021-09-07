@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        axios.post('/api/main')
+            .then((res) => {
+                let data = res.data;
+                let mainTable = document.getElementById('main-table');
+                data.forEach(element => {
+                    let row = mainTable.insertRow(mainTable.rows.length);
+                    row.insertCell(0).innerHTML = element.post_title + "ㅣ";
+                    row.insertCell(1).innerHTML = element.post_content + "ㅣ";
+                    row.insertCell(2).innerHTML = element.post_writer + "ㅣ";
+                    row.insertCell(3).innerHTML = element.createdAt.substr(0, 10);
+                });
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    </script>
+    <h2>메인 페이지</h2>
+    <button type="button" onclick="location.href = '/login'">로그인</button>
+    </br>
+    <table style="border: 1px;">
+        <thead>
+            <tr>
+                <th colspan="4">
+                    <a href="/board">게시판 바로가기</a>
+                </th>
+            </tr>
+        </thead>
+        <tbody id="main-table"></tbody>
+    </table>
+    
+</body>
+</html>

@@ -1,0 +1,35 @@
+{
+  "name": "song_web",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon bin/www",
+    "test": "mocha test/*"
+  },
+  "author": "jiwoong",
+  "license": "ISC",
+  "dependencies": {
+    "app-root-path": "^3.0.0",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^10.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.3.0",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "sequelize": "^6.6.5",
+    "sequelize-cli": "^6.2.0",
+    "winston": "^3.3.3",
+    "winston-daily-rotate-file": "^4.5.5"
+  },
+  "devDependencies": {
+    "mocha": "^9.1.1",
+    "nodemon": "^2.0.12",
+    "should": "^13.2.3",
+    "supertest": "^6.1.6"
+  }
+}
