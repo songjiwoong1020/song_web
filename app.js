@@ -1,12 +1,9 @@
 const express = require('express');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
-const session = require('express-session');
-const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const path = require('path');
 const logger = require('./config/logger');
-const passportConfig = require('./passport');
 
 dotenv.config();
 const pageRouter = require('./routes/page');
@@ -15,7 +12,6 @@ const { sequelize } = require('./models');
 
 const app = express();
 
-passportConfig();
 
 app.set('port', process.env.PORT || 8001);
 
@@ -34,16 +30,7 @@ app.use(morgan('dev'));
 app.use('/', express.static(path.join(__dirname, '/client/public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// app.use(cookieParser(process.env.COOKIE_SECRET));
-// app.use(session({
-//     resave : false,
-//     saveUninitialized : false,
-//     secret : process.env.COOKIE_SECRET,
-//     cookie : {
-//         httpOnly : true,
-//         secure : false
-//     }
-// }));
+
 app.use(passport.initialize());
 
 app.use('/', pageRouter);

@@ -7,7 +7,7 @@ const User = require('../models/user');
 module.exports = () => {
     passport.use(new kakaoStrategy({
         clientID: process.env.CLIENT_ID,
-        callbackURL: '/api/kakao/callback',
+        callbackURL: '/api/oauth',
         clientSecret: process.env.CLIENT_SECRET
     }, async (accessToken, refreshToken, profile, done) => {
         console.log(profile);
