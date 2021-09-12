@@ -1,8 +1,8 @@
 const kakao = require('./kakaoStrategy');
-const jwt = require('./jwtStrategy');
+//const jwt = require('./jwtStrategy');
 
 module.exports = () => {
 
     kakao();
-    jwt();
+//    jwt();
 }

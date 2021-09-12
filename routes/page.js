@@ -8,7 +8,6 @@ const { isLoggedIn } = require('../util/commonUtil');
 const router = express.Router();
 
 router.get('/', (req, res) => {    
-    console.log(`메인페이지 req.user = ${JSON.stringify(req.user)}`)
     res.render('main.ejs', {req, res});
 });
 
@@ -16,7 +15,10 @@ router.get('/login', (req, res) => {
     res.render('login.ejs');
 });
 
-router.get('/profile', passport.authenticate('jwt', { session: false}), (req, res) => {
+router.get('/profile', //passport.authenticate('jwt', { session: false}),
+(req, res) => {
+    console.log(`req.jwt = ${req.jwt}`);
+
     res.render('profile.ejs');
 });
 
