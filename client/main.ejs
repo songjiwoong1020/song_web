@@ -9,7 +9,9 @@
 <body>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
-        axios.post('/api/main')
+        axios.post('/api/main', {
+            headers : { authorization: a }
+        })
             .then((res) => {
                 let data = res.data;
                 let mainTable = document.getElementById('main-table');

@@ -5,17 +5,11 @@ const logger = require('../config/logger');
 const Post = require('../models/post');
 const axios = require('axios');
 const store = require('store');
-const { verifyToken } = require('../util/commonUtil');
 
 const router = express.Router();
 
 router.post('/main', async (req, res, next) => {
-    console.log('/api/main ajax요청');
-    console.log(`req.headers = ${JSON.stringify(req.headers.authorization)}`);
     try{
-        if(req.headers['authorization']){
-            console.log('메인에서 토큰 있음');
-        }
         const posts = await Post.findAll({
             order: [['created_at', 'ASC']],
             limit: 5
@@ -36,10 +30,18 @@ router.get('/oauth', passport.authenticate('kakao', {
     session: false,
     failureRedirect: '/',
     }), async (req, res) => {
-        await axios.post('http://localhost:8001/api/token', {
-            user: req.user
-        })
-        res.render('main.ejs', {req, res});
+        // await axios.post('http://localhost:8001/api/token', {
+        //     user: req.user
+        // })
+        // res.render('main.ejs', {req, res});
+        const accessToken = jwt.sign({
+            id: req.user.user_id,
+            nick: req.user.user_nick
+        }, process.env.JWT_ACCESS_TOKEN_SECRET, {
+            expiresIn: '5s',// refresh토큰 구현시 사용하자
+            issuer: 'jiwoong'
+        });
+        return res.header({ accessToken: accessToken });
     });
 
 router.post('/token', (req, res) => {
@@ -48,7 +50,7 @@ router.post('/token', (req, res) => {
         id: user.id,
         nick: user.user_nick
     }, process.env.JWT_ACCESS_TOKEN_SECRET, {
-        //expiresIn: '10m', refresh토큰 구현시 사용하자
+        //expiresIn: '5s',// refresh토큰 구현시 사용하자
         issuer: 'jiwoong'
     });
     console.log(`accessToken = ${accessToken}`);
