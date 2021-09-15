@@ -26,7 +26,7 @@ router.post('/main', async (req, res, next) => {
 
 router.get('/kakao', passport.authenticate('kakao', { session: false }));
 
-router.get('/oauth', passport.authenticate('kakao', {
+router.get('/kakao/callback', passport.authenticate('kakao', {
     session: false,
     failureRedirect: '/',
     }), async (req, res) => {

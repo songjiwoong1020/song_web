@@ -15,14 +15,10 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/loginProcess', (req, res) => {
-    console.log(req);
     res.render('login_process.ejs');
 });
 
-router.get('/profile', //passport.authenticate('jwt', { session: false}),
-(req, res) => {
-    console.log(`req.jwt = ${req.jwt}`);
-
+router.get('/profile', (req, res) => {
     res.render('profile.ejs');
 });
 

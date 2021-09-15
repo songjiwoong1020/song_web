@@ -5,47 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script>
-        Kakao.init('2a61fdd8c4bd1f10e300fc3d0ecfd730');
-    </script>
 </head>
 <body>
     <h2>로그인</h2>
-    <button type="button" onclick="location.href = 'javascript:kakaoLogin()'">카카오 로그인</button>
-    <a id="custom-login-btn" href="javascript:loginWithKakao()">
+    <a href="/api/kakao">
         <img
           src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
           width="222"
         />
     </a>
 </body>
-    <script>
-        function kakaoLogin(){
-            const data = axios.get('/api/kakao')
-            .then(() =>{
-                console.log(data.data);
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-        }
-        function loginWithKakao() {
-            Kakao.Auth.login({
-                success: function(res) {
-                    loginAfter();
-                },
-                fail: function(err) {
-                    alert(JSON.stringify(err))
-                },
-            });
-         
-        }
-        function loginAfter() {
-            Kakao.Auth.authorize({
-                redirectUri: 'http://localhost:8001/api/oauth'
-            })
-        }
-    </script>
 </html>
