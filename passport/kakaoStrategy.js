@@ -7,7 +7,7 @@ const User = require('../models/user');
 module.exports = () => {
     passport.use(new kakaoStrategy({
         clientID: process.env.CLIENT_ID,
-        callbackURL: '/api/kakaoCallback',
+        callbackURL: '/kakao/callback',
         clientSecret: process.env.CLIENT_SECRET
     }, async (accessToken, refreshToken, profile, done) => {
         try {
@@ -15,7 +15,6 @@ module.exports = () => {
                 where: { user_snsid: profile.id, user_provider: 'kakao' }
             });
             if(exUser){
-                console.log('로그인 성공');
                 done(null, exUser);
             } else {
                 const newUser = await User.create({
@@ -25,7 +24,6 @@ module.exports = () => {
                     user_snsid: profile.id,
                     user_created: new Date()
                 });
-                console.log('로그인 성공');
                 done(null, newUser);
             }
         } catch (err) {

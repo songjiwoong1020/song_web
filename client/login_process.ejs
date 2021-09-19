@@ -1,4 +1,8 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-    //const data = axios.get();
+    let req = new XMLHttpRequest();
+    req.open("GET", document.location, false);
+    req.send(null);
+    let headers = req.getAllResponseHeaders().toLocaleLowerCase();
+    alert(headers);
 </script>

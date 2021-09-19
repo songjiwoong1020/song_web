@@ -30,3 +30,5 @@ util.isLoggedin = (req, res, next) => {
 
     }
 }
+
+module.exports = util;
