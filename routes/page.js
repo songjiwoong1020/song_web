@@ -15,20 +15,9 @@ router.get('/login', (req, res) => {
     res.render('login.ejs');
 });
 
-router.get('/kakao/callback', passport.authenticate('kakao', {
-        session: false,
-        failureRedirect: '/',
-        }), async (req, res) => {
-            try{
-                const result = await axios.post('http://localhost:8001/api/token', {
-                    user: req.user
-                });
-                const token = result.data.data
-                res.header({ Authorization: 'bearer ' + token}).render('login_process.ejs');
-            } catch (err) {
-                console.log(err);
-            }
-        });
+router.get('/kakao/callback', (req, res) => {
+    res.render('login_process_kakao.ejs');
+});
 
 router.get('/profile', (req, res) => {
     res.render('profile.ejs');
