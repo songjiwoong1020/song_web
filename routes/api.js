@@ -14,7 +14,7 @@ router.post('/main', async (req, res) => {
             order: [['created_at', 'ASC']],
             limit: 5
         });
-        res.json(posts);
+        res.json(util.successTrue(posts));
     } catch(err) {
         logger.error(err);
         return res.status(500).json({
