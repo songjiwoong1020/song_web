@@ -17,10 +17,7 @@ router.post('/main', async (req, res) => {
         res.json(util.successTrue(posts));
     } catch(err) {
         logger.error(err);
-        return res.status(500).json({
-            code: 500,
-            message: '서버 에러'
-        });
+        return res.status(500).json(util.successFalse(err), 'POST /main error');
     }
 });
 
@@ -60,13 +57,10 @@ router.post('/board/write', async (req, res) => {
             post_writer: req.body.user_nick
         });
         //console.log(post);
-        res.status(201).json(post);
+        res.status(201).json(util.successTrue(post));
     } catch(err) { 
         logger.error(err);
-        return res.status(500).json({
-            code: 500,
-            message: '서버 에러'
-        });
+        return res.status(500).json(util.successFalse(err, 'POST /board/write error'));
     }
 });
 
