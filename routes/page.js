@@ -8,6 +8,7 @@ const axios = require('axios');
 const router = express.Router();
 
 router.get('/', (req, res) => {    
+    const data = axios.get('http://localhost:8001/api/main');
     res.render('main.ejs', {req, res});
 });
 
