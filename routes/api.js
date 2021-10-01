@@ -56,6 +56,20 @@ router.post('/board/write', async (req, res) => {
             post_content: req.body.content,
             post_writer: req.body.user_nick
         });
+        res.status(201).json(util.successTrue(post));
+    } catch(err) { 
+        logger.error(err);
+        return res.status(500).json(util.successFalse(err, 'POST /board/write error'));
+    }
+});
+
+router.post('/board/update', async (req, res) => {
+    try{
+        const updatePost = await Post.update({
+            post_title: req.body.title,
+            post_content: req.body.content,
+            post_writer: req.body.user_nick
+        });
         //console.log(post);
         res.status(201).json(util.successTrue(post));
     } catch(err) { 
