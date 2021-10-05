@@ -28,3 +28,18 @@ describe('POST /api/board/write', () => {
             });
     });
 });
+
+describe('POST /api/board/update', () => {
+    it('POST /api/board/update 게시글 수정', (done) => {
+        request(app)
+            .post('/api/board/update')
+            .send({title: 'test_title'})
+            .send({content: 'test_content'})
+            .send({user_nick: 'test_nick'})
+            .expect(201)
+            .end((err, res) => {
+                if(err) throw err;
+                done();
+            });
+    });
+});
